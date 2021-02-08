@@ -29,7 +29,7 @@ func AddProvider() {
 		{
 			Name: "provider",
 			Prompt: &survey.Select{
-				Message: "Choose a color:",
+				Message: "Choose a Dns Provider:",
 				Options: global.Providers,
 			},
 		},
@@ -37,7 +37,7 @@ func AddProvider() {
 
 	var qsLoginWithKey = []*survey.Question{
 		{
-			Name: "AKID",
+			Name: "REGION_ID",
 			Prompt: &survey.Input{
 				Message: "输入 AK ID",
 			},
@@ -45,7 +45,15 @@ func AddProvider() {
 			Transform: survey.Title,
 		},
 		{
-			Name: "AKEY",
+			Name: "ACCESS_KEY_ID",
+			Prompt: &survey.Input{
+				Message: "输入 AK ID",
+			},
+			Validate:  survey.Required,
+			Transform: survey.Title,
+		},
+		{
+			Name: "ACCESS_KEY_SECRET",
 			Prompt: &survey.Password{
 				Message: "输入 AK Secret: ",
 			},

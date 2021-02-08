@@ -15,10 +15,11 @@ var cmdRoot = &cobra.Command{
 }
 
 func init() {
+	cmdRoot.AddCommand(configureCmd)
 
 	// global vars
-	rootCmd.PersistentFlags().StringVarP(&global.ConfigFile, "config", "c", "$HOME/.certx/certx.json", "config file")
-	rootCmd.PersistentFlags().StringVarP(&global.Provider, "provider", "p", "dnspod", "provider")
+	cmdRoot.PersistentFlags().StringVarP(&global.ConfigFile, "config", "c", "$HOME/.certx/certx.json", "config file")
+	cmdRoot.PersistentFlags().StringVarP(&global.Provider, "provider", "p", "dnspod", "provider")
 }
 
 func main() {

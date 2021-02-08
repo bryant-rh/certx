@@ -1,7 +1,6 @@
-package cmd
+package main
 
 import (
-	//"github.com/sirupsen/logrus"
 	"github.com/bryant-rh/certx/pkg/configure"
 	"github.com/spf13/cobra"
 )
@@ -49,7 +48,6 @@ var configureCurrentCmd = &cobra.Command{
 //}
 
 func init() {
-	cmdRoot.AddCommand(configureCmd)
 
 	configureCmd.AddCommand(configureCurrentCmd)
 	//configureCmd.AddCommand(configureDeleteCmd)
