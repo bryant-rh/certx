@@ -1,0 +1,13 @@
+{
+    "Current": "aliyun",
+    "Provider": {
+        "aliyun": {
+            "REGION_ID": "AKIDxxxxxxx",
+            "ACCESS_KEY_ID": "AKIDxxxxxxx",
+            "ACCESS_KEY_SECRET": "AKEYxxxxxxx"
+        },
+        "dnspod": {
+            "DnsPodToken": "AKIDxxxxxxx"
+        }
+    }
+}
