@@ -18,7 +18,7 @@ func init() {
 
 	// global vars
 	rootCmd.PersistentFlags().StringVarP(&global.ConfigFile, "config", "c", "$HOME/.certx/certx.json", "config file")
-	rootCmd.PersistentFlags().StringVarP(&global.Provider, "provider", "p", "default", "provider")
+	rootCmd.PersistentFlags().StringVarP(&global.Provider, "provider", "p", "dnspod", "provider")
 }
 
 func main() {

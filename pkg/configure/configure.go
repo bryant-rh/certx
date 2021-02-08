@@ -23,7 +23,7 @@ func ListProvider() {
 // AddProfile 增加
 func AddProvider() {
 	certx := global.Load()
-	var item global.C
+	var item global.CertxConfigItem
 
 	var qsProvider = []*survey.Question{
 		{
