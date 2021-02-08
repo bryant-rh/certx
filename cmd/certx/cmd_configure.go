@@ -2,6 +2,7 @@ package cmd
 
 import (
 	//"github.com/sirupsen/logrus"
+	"github.com/bryant-rh/certx/pkg/configure"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +18,7 @@ var configureListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "列出 Config 中的所有 provider",
 	Run: func(cmd *cobra.Command, args []string) {
-		ListProviders()
+		configure.ListProviders()
 	},
 }
 
@@ -25,7 +26,7 @@ var configureAddCmd = &cobra.Command{
 	Use:   "add",
 	Short: "向 Config 中增加 provider",
 	Run: func(cmd *cobra.Command, args []string) {
-		AddProvider()
+		configure.AddProvider()
 	},
 }
 
@@ -35,7 +36,7 @@ var configureCurrentCmd = &cobra.Command{
 	Use:   "set",
 	Short: "修改 current值， 设置默认生效的 profile",
 	Run: func(cmd *cobra.Command, args []string) {
-		SetCurrent()
+		configure.SetCurrent()
 	},
 }
 
