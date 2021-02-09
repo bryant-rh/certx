@@ -12,34 +12,34 @@ var Providers []string = []string{"aliyun", "dnspod"}
 
 var (
 	//指定配置路径
-	ConfigFile string
+	CfgFile string
 	//Provider 指定配置选项
 	Provider string
 )
 
-type CertxConfig struct {
-	Current string                     `json: "current"`
-	Items   map[string]CertxConfigItem `json:"items"`
+type CERTxConfig struct {
+	Current string                     `json:"current"`
+	Items   map[string]CERTxConfigItem `json:"items"`
 }
 
-type CertxConfigItem struct {
+type CERTxConfigItem struct {
 	//aliyun 地域ID
-	REGION_ID string `json:"REGION_ID"`
+	RegionID string `json:"regionid,omitempty"`
 	//aliyun access_key_id
-	ACCESS_KEY_ID string `json:"ACCESS_KEY_ID"`
+	AccessKeyID string `json:"accesskeyid"`
 	//aliyun access_key_secret
-	ACCESS_KEY_SECRET string `json:"ACCESS_KEY_SECRET"`
+	AccessKeySecret string `json:"accesskeysecret,omitempty"`
 
 	// Token 为 DNSPod 的账户信息
-	DnsPodToken string `json: "DnsPodToken"`
+	DNSPodToken string `json:"DnsPodToken"`
 }
 
 // Load 加载配置文件
-func load() (certx CertxConfig) {
-	if ConfigFile == "" || ConfigFile == "$HOME/.certx/certx.json" {
-		ConfigFile = fmt.Sprintf("%s/.certx/certx.json", os.Getenv("HOME"))
+func Load() (certx CERTxConfig) {
+	if CfgFile == "" || CfgFile == "$HOME/.certx/certx.json" {
+		CfgFile = fmt.Sprintf("%s/.certx/certx.json", os.Getenv("HOME"))
 	}
-	data, err := ioutil.ReadFile(ConfigFile)
+	data, err := ioutil.ReadFile(CfgFile)
 	if err != nil {
 		panic(err)
 	}
@@ -53,7 +53,7 @@ func load() (certx CertxConfig) {
 }
 
 //Dump 写入配置文件
-func (certx CertxConfig) Dump(configFile string) {
+func (certx CERTxConfig) Dump(configFile string) {
 	f, err := os.OpenFile(configFile, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0700)
 	if err != nil {
 		panic(err)
@@ -65,7 +65,7 @@ func (certx CertxConfig) Dump(configFile string) {
 // New 新建 配置文件
 
 // Marshal 格式化配置文件
-func (certx CertxConfig) Marshal() (s string) {
+func (certx CERTxConfig) Marshal() (s string) {
 
 	b, err := json.MarshalIndent(certx, "", "  ")
 	if err != nil {
@@ -76,6 +76,6 @@ func (certx CertxConfig) Marshal() (s string) {
 }
 
 // Delete 删除 Provider
-func (certx *CertxConfig) Delete(provider string) {
+func (certx *CERTxConfig) Delete(provider string) {
 	delete(certx.Items, provider)
 }

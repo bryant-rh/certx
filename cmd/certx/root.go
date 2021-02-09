@@ -1,6 +1,7 @@
-package main
+package certx
 
 import (
+	"github.com/bryant-rh/certx/cmd/certx"
 	"github.com/bryant-rh/certx/global"
 	"github.com/spf13/cobra"
 )
@@ -15,14 +16,14 @@ var cmdRoot = &cobra.Command{
 }
 
 func init() {
-	cmdRoot.AddCommand(configureCmd)
+	cmdRoot.AddCommand(certx.ConfigureCmd)
 
 	// global vars
-	cmdRoot.PersistentFlags().StringVarP(&global.ConfigFile, "config", "c", "$HOME/.certx/certx.json", "config file")
+	cmdRoot.PersistentFlags().StringVarP(&global.CfgFile, "config", "c", "$HOME/.certx/certx.json", "config file")
 	cmdRoot.PersistentFlags().StringVarP(&global.Provider, "provider", "p", "dnspod", "provider")
 }
 
-func main() {
+func Execute() {
 	if err := cmdRoot.Execute(); err != nil {
 		panic(err)
 	}

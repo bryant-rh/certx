@@ -1,11 +1,11 @@
-package main
+package certx
 
 import (
 	"github.com/bryant-rh/certx/pkg/configure"
 	"github.com/spf13/cobra"
 )
 
-var configureCmd = &cobra.Command{
+var ConfigureCmd = &cobra.Command{
 	Use:   "configure",
 	Short: "管理配置文件",
 	// Run: func(cmd *cobra.Command, args []string) {
@@ -17,7 +17,7 @@ var configureListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "列出 Config 中的所有 provider",
 	Run: func(cmd *cobra.Command, args []string) {
-		configure.ListProviders()
+		configure.ListProvider()
 	},
 }
 
@@ -48,9 +48,8 @@ var configureCurrentCmd = &cobra.Command{
 //}
 
 func init() {
-
-	configureCmd.AddCommand(configureCurrentCmd)
+	ConfigureCmd.AddCommand(configureCurrentCmd)
 	//configureCmd.AddCommand(configureDeleteCmd)
-	configureCmd.AddCommand(configureListCmd)
+	ConfigureCmd.AddCommand(configureListCmd)
 	//configureCmd.AddCommand(configureDomainsCmd)
 }

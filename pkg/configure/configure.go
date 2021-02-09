@@ -23,7 +23,7 @@ func ListProvider() {
 // AddProfile 增加
 func AddProvider() {
 	certx := global.Load()
-	var item global.CertxConfigItem
+	var item global.CERTxConfigItem
 
 	var qsProvider = []*survey.Question{
 		{
@@ -39,7 +39,7 @@ func AddProvider() {
 		{
 			Name: "REGION_ID",
 			Prompt: &survey.Input{
-				Message: "输入 AK ID",
+				Message: "输入 Aliyun REGION_ID:",
 			},
 			Validate:  survey.Required,
 			Transform: survey.Title,
@@ -47,7 +47,7 @@ func AddProvider() {
 		{
 			Name: "ACCESS_KEY_ID",
 			Prompt: &survey.Input{
-				Message: "输入 AK ID",
+				Message: "输入 Aliyun ACCESS_KEY_ID:",
 			},
 			Validate:  survey.Required,
 			Transform: survey.Title,
@@ -55,32 +55,45 @@ func AddProvider() {
 		{
 			Name: "ACCESS_KEY_SECRET",
 			Prompt: &survey.Password{
-				Message: "输入 AK Secret: ",
+				Message: "输入 Aliyun ACCESS_KEY_ID: ",
 			},
 			Validate:  survey.Required,
 			Transform: survey.Title,
 		},
 	}
 
+	var dnsPodToken = []*survey.Question{
+		{
+			Name: "DnsPodToken",
+			Prompt: &survey.Input{
+				Message: "输入 DnsPod DnsPodToken:",
+			},
+			Validate:  survey.Required,
+			Transform: survey.Title,
+		},
+	}
 	err := survey.Ask(qsProvider, &item)
 	if err != nil {
 		panic(err)
 	}
 
-	if item.Provider == "aliyun" || item.Provider == "qcloud" {
+	if global.Provider == "aliyun" {
 		survey.Ask(qsLoginWithKey, &item)
 	}
 
+	if global.Provider == "dnspod" {
+		survey.Ask(dnsPodToken, &item)
+	}
 	var confirm bool = false
 
 	survey.AskOne(&survey.Confirm{
-		Message: fmt.Sprintf("是否添加 %s 到配置中", global.Profile),
+		Message: fmt.Sprintf("是否添加 %s 到配置中", global.Provider),
 	}, &confirm,
 	)
 
 	if confirm {
-		dnsx.Items[global.Profile] = item
-		dnsx.Dump(global.CfgFile)
+		certx.Items[global.Provider] = item
+		certx.Dump(global.CfgFile)
 	} else {
 		logrus.Infoln("用户取消添加")
 	}
